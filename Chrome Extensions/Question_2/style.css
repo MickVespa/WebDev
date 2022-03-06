@@ -1,0 +1,14 @@
+/* 
+Style the Div
+*/
+
+ 
+.question2 {
+    z-index: 1000;
+    position: fixed;
+    top : 20%;
+    left : 0%;
+    background-color : magenta;
+    padding : 1%;
+    border : solid 1px black;
+}

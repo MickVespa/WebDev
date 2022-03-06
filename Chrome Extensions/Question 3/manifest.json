@@ -1,0 +1,19 @@
+{
+  "name": "Question 3",
+  "description": "CSC 301 Rick Rolls Chrome Extension",
+  "version": "1.0",
+  "permissions": [
+    "activeTab" 
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true //keep Rick Rolling
+  },
+  "browser_action": {
+    "default_title": "jQuery Rick Rolls"
+  },
+  "manifest_version": 2
+}
+
+

@@ -1,0 +1,26 @@
+<!doctype html>
+<html style="min-width:500px;">
+  <head>
+    <title>Enter search terms</title>
+    <script src="popup.js"></script>
+  </head>
+
+  <body>
+      <h2> Enter a search term that you wish to highlight</h2>
+
+      <label for = 'searchString'>Enter your search term: </label>
+      <input type="text" id="searchString" onkeyup="typed()" placeholder = "Enter a search term">
+      <nbsp;>
+      <button id="btnHighlight">Highlight!</button>
+      <button id="btn2" disabled> More Terms</button>
+      <br>
+      <label hidden id= "text2" for=" searchString2"> Enter your search term:</label>
+      <input type="hidden" id="searchString2" onfocusout="hideText2()" placeholder = "Enter additional term">
+      <br>
+      <label hidden id= "text3" for=" searchString3"> Enter your search term:</label>
+      <input type="hidden" id="searchString3" onfocusout="hideText3()" placeholder = "Enter additional term">
+      <p></p>
+    
+
+  </body>
+</html>
