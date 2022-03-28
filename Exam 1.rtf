@@ -1,0 +1,440 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<!-- Mick Vespa, Exam 1 Wordle Project, due 2/23/2022 -->\
+<html lang="en">\
+  <head>\
+    <title>Wordle</title>\
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>\
+    <title>Wordle</title>\
+\
+    <meta name="viewport" content="width=device-width, initial-scale=1" />\
+    <link\
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"\
+      rel="stylesheet"\
+    />\
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>\
+\
+    <style>\
+\
+      #help \{\
+        margin-top: 20px;\
+      \}\
+\
+      #mySubmit \{\
+        width: 30%;\
+      \}\
+\
+      body \{\
+        background-color: #ffffff;\
+        transition: .5s all ease;\
+        color: #000000;\
+      \}\
+\
+      body.dark \{\
+        background-color: #333333;\
+        transition: .5s all ease;\
+        color: #ffffff;\
+      \}\
+      input \{\
+        text-align: center;\
+      \}\
+\
+      div.keyboard-row \{\
+        display:flex;\
+        align-items: center;\
+        justify-content: center;\
+      \}\
+\
+      div.congragulations \{\
+        visibility: hidden;\
+        position: fixed;\
+        top: 12em;\
+        width: 100%;\
+        height: 38%;\
+        background-Color: black;\
+        color: white;\
+        text-align: center;\
+      \}\
+\
+      .keyboard-button \{\
+        margin:3px;\
+        border-radius: 4px;\
+        border: 2px: solid gray;\
+      \}\
+\
+      .correct \{\
+        background-color: #6aaa64;\
+        margin:3px;\
+        border-radius: 4px;\
+        border: 2px: solid #6aaa64;\
+      \}\
+\
+      .almost \{\
+        background-color: #c9b458;\
+        margin:3px;\
+        border-radius: 4px;\
+        border: 2px: solid #c9b458;\
+      \}\
+\
+      .wrong \{\
+        background-color: #787c7e;\
+        margin:3px;\
+        border-radius: 4px;\
+        border: 2px: solid #787c7e;\
+      \}\
+\
+      a:hover \{\
+        font-size: 110%;\
+      \}\
+\
+      .navbar li \{\
+      margin-left : 1em;\
+      margin-right : 1em;\
+      \}\
+\
+      .navbar-nav \{\
+        margin: auto;\
+      \}\
+\
+      .word_blocks \{\
+        display: flex;\
+        justify-content: center;\
+        text-align: center;\
+      \}\
+\
+      .word_block \{\
+        margin-left : 1em;\
+        margin-right : 1em;\
+        margin-bottom: 32px;\
+        text-transform: uppercase;\
+        width: 10%;\
+      \}\
+    </style>\
+  </head>\
+\
+  <body>\
+    <nav\
+      class="navbar navbar-expand-lg navbar-light bg-light"\
+      id="navbar_container"\
+    >\
+      <div class="container-fluid">\
+        <h1>Wordle Project</h1>\
+        <button\
+          class="navbar-toggler"\
+          type="button"\
+          data-bs-toggle="collapse"\
+          data-bs-target="#navbarNav"\
+          aria-controls="navbarNav"\
+          aria-expanded="false"\
+          aria-label="Toggle navigation"\
+        >\
+          <span class="navbar-toggler-icon"></span>\
+        </button>\
+        <div class="collapse navbar-collapse" id="navbarNav">\
+          <ul class="navbar-nav">\
+            <li class="nav-item">\
+              <a class="nav-link" id="wordle_link" href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>\
+            </li>\
+            <li class="nav-item">\
+              <a class="nav-link" id="dark_mode" href="#">Dark Mode</a>\
+            </li>\
+          </ul>\
+        </div>\
+      </div>\
+    </nav>\
+\
+    <div class="container m-5">\
+      <p>\
+        Welcome to <strong>Pseudo-Wordle!</strong> <br />\
+        This is a spin off from the successful game Wordle located at this\
+        <a href="https://www.nytimes.com/games/wordle/index.html">website</a>.\
+        <br />\
+        <br />\
+        <em>Directions: </em>Guess the 5 letter word, after submitting a guess\
+        the letters chosen will be color-coded as follows: <br />\
+      </p>\
+\
+      <ul>\
+        <li>\
+          the letter is in the <span class="correct"> corect position </span>\
+        </li>\
+        <li>\
+          The letter is in the <span class="almost"> wrong position </span>\
+        </li>\
+        <li>the letter is <span class="wrong"> not in the word </span></li>\
+      </ul>\
+\
+      <br />\
+      <br />\
+      <br />\
+\
+      <div class="word_blocks">\
+        <form onsubmit="return false;">\
+          <input\
+            class="word_block"\
+            type="text"\
+            id="letter1"\
+            name="letter1"\
+            required\
+            maxlength="1"\
+            size="10"\
+          />\
+\
+          <input\
+            class="word_block"\
+            type="text"\
+            id="letter2"\
+            name="letter2"\
+            required\
+            maxlength="1"\
+            size="10"\
+          />\
+\
+          <input\
+            class="word_block"\
+            type="text"\
+            id="letter3"\
+            name="letter3"\
+            required\
+            maxlength="1"\
+            size="10"\
+          />\
+\
+          <input\
+            class="word_block"\
+            type="text"\
+            id="letter4"\
+            name="letter4"\
+            required\
+            maxlength="1"\
+            size="10"\
+          />\
+\
+          <input\
+            class="word_block"\
+            type="text"\
+            id="letter5"\
+            name="letter5"\
+            required\
+            maxlength="1"\
+            size="10"\
+          />\
+\
+          <br />\
+\
+          <input\
+            type="button"\
+            id="mySubmit"\
+            class="btn btn-primary btn-lg"\
+            value="Submit"\
+          />\
+          <input\
+            type="reset"\
+            id="reset_guess"\
+            class="btn btn-info btn-lg"\
+            value="Reset"\
+          />\
+          <br />\
+          <input\
+            type="button"\
+            id="help"\
+            class="btn btn-warning btn-sm"\
+            value="I Give Up"\
+          />\
+        </form>\
+      </div>\
+    </div>\
+\
+    <!-- jQuery Script -->\
+    <script type="text/javascript">\
+      $(document).ready(function () \{\
+        $("#dark_mode").click(function () \{\
+          $("body").toggleClass("dark");\
+          $("#navbar_container").toggleClass("navbar-dark bg-dark");\
+          if ($("body").hasClass("dark")) \{\
+            $("#dark_mode").text("Light Mode");\
+          \} else \{\
+            $("#dark_mode").text("Dark Mode");\
+          \}\
+        \});\
+        $("#congrats").click(function () \{\
+          $("#congrats").css("visibility", "hidden");\
+        \});\
+        //reset button jquery event change color codes\
+        $("#reset_guess").click(function () \{\
+          for (let i = 1; i <= 5; i++) \{\
+            let input_box = document.getElementById("letter" + i);\
+            input_box.classList.remove("correct");\
+            input_box.classList.remove("almost");\
+            input_box.classList.remove("wrong");\
+          \}\
+          $("button").removeClass("correct");\
+          $("button").removeClass("almost");\
+          $("button").removeClass("wrong");\
+        \});\
+        //i give up button\
+        $("#help").click(function () \{\
+          alert("The Word is " + ANSWER);\
+        \});\
+      \});\
+    </script>\
+\
+    <script>\
+      "use strict";\
+\
+      const words = [\
+        "CHECK",\
+        "FANCY",\
+        "BUCKO",\
+        "BRUSH",\
+        "HAPPY",\
+        "CANDY",\
+        "FLOOR",\
+        "APPLE",\
+      ];\
+      var ANSWER = words[Math.floor(Math.random() * words.length)];\
+      var correct_answer = ANSWER.split("");\
+      var guess_attempt = [];\
+\
+      var correct_position = [];\
+      var almost_position = [];\
+      var wrong_position = [];\
+\
+      document.write('<div class = "congragulations" id = "congrats">');\
+      document.write("<h1> Congragulations! you solved the Wordle!");\
+      document.write("</h1>");\
+      document.write("<br>");\
+      document.write("<p> click to close");\
+      document.write("</div>");\
+      \
+      //auto change text input after entry\
+      $(".word_block").keyup(function () \{ \
+        if (this.value.length === this.maxLength) \{\
+          var $next = $(this).next('.word_block');\
+          if ($next.length)\
+            $(this).next('.word_block').focus();\
+          else\
+            $(this).blur();\
+        \}\
+      \});\
+      \
+      //Enter key will click the submit button\
+      document.addEventListener("keyup", function(event) \{\
+        if (event.keyCode === 13) \{\
+          event.preventDefault();\
+          document.getElementById("mySubmit").click();\
+        \}\
+      \});\
+\
+      // displays "keys" for each character in the keys string\
+      function writeKeys(keys) \{\
+        document.write('<div class = "d-flex justify-content-center">');\
+        for (let k of keys) \{\
+          document.write("<div>");\
+          document.write(\
+            '<button class = "keyboard-button" id = "' +\
+              k +\
+              '">' +\
+              k +\
+              "</button>"\
+          );\
+          document.write("</div>");\
+        \}\
+\
+        document.write("</div>");\
+      \}\
+\
+      document.write('<div class = "container keys m-5">');\
+\
+      writeKeys("QWERTYUIOP");\
+      writeKeys("ASDFGHJKL");\
+      writeKeys("ZXCVBNM");\
+\
+      document.write("</div>");\
+\
+      document\
+        .getElementById("mySubmit")\
+        .addEventListener("click", submit_function);\
+\
+      //Submit Function\
+      function submit_function() \{\
+        //clear previous submit guess\
+        correct_position.length = 0;\
+        almost_position.length = 0;\
+        wrong_position.length = 0;\
+\
+        for (let i = 1; i <= 5; i++) \{\
+          guess_attempt[i - 1] = document\
+            .getElementById("letter" + i)\
+            .value.toUpperCase();\
+        \}\
+\
+        //compare guess to answer by looping through indexes\
+        for (let i = 0; i < 5; i++) \{\
+          if (guess_attempt[i] === correct_answer[i]) \{\
+            correct_position.push(i);\
+          \} else if (correct_answer.includes(guess_attempt[i])) \{\
+            almost_position.push(i);\
+          \} else \{\
+            wrong_position.push(i);\
+          \}\
+        \}\
+\
+        // color input text as appropriate\
+        for (let i = 0; i < correct_position.length; i++) \{\
+          document\
+            .getElementById("letter" + (correct_position[i] + 1))\
+            .classList.add("correct");\
+        \}\
+        for (let i = 0; i < almost_position.length; i++) \{\
+          document\
+            .getElementById("letter" + (almost_position[i] + 1))\
+            .classList.add("almost");\
+        \}\
+        for (let i = 0; i < wrong_position.length; i++) \{\
+          document\
+            .getElementById("letter" + (wrong_position[i] + 1))\
+            .classList.add("wrong");\
+        \}\
+\
+        //show hidden congragulations Div when answer is correct\
+        if (correct_position.length === 5) \{\
+          $("#congrats").css("visibility", "visible");\
+        \}\
+\
+        //color keyboard as appropriate\
+        for (let i = 1; i <= 5; i++) \{\
+          let keyboard_letter = document.getElementById("letter" + i);\
+          //way to verify that value in the text input is a letter, and not blank/symbol/number\
+          if (\
+            keyboard_letter.value.toUpperCase() !==\
+            keyboard_letter.value.toLowerCase()\
+          ) \{\
+            let keyboard_letter2 = keyboard_letter.value.toUpperCase();\
+            document\
+              .getElementById(keyboard_letter2)\
+              .classList.add(keyboard_letter.classList[1]);\
+          \}\
+        \}\
+\
+        //change textbox color after submit\
+        for (let i = 1; i <= 5; i++) \{\
+          let input_box = document.getElementById("letter" + i);\
+          input_box.addEventListener("input", clear_color);\
+        \}\
+        function clear_color() \{\
+          this.classList.remove("correct");\
+          this.classList.remove("almost");\
+          this.classList.remove("wrong");\
+        \}\
+      \}\
+    </script>\
+  </body>\
+</html>\
+}
