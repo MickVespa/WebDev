@@ -14,6 +14,7 @@ function findWord(){
  }
  document.body.addEventListener('dblclick',display);
 
+ var msg = "";
  function getAPI(){
      const data = null;
      var xhttp = new XMLHttpRequest();
@@ -47,7 +48,8 @@ function findWord(){
     xhttp.setRequestHeader("X-RapidAPI-Host", "wordsapiv1.p.rapidapi.com");
     xhttp.setRequestHeader("X-RapidAPI-Key", "8dc8c1b89bmshb35f0c5a6ad2260p19de8cjsnad3259bac4af");
     xhttp.send(data);
- }  
+     
+}  
 document.body.addEventListener('dblclick',getAPI);
 
 //get mouse click coordinates
@@ -66,6 +68,7 @@ function addDiv(x,y) {
     var e = document.createElement('div');
     e.id = "mickVespaFinal";
     $(e).addClass("circle");
+    e.innerHTML = msg;
     
 
      //move above word
