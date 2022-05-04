@@ -43,8 +43,8 @@ function findWord(){
             console.log(msg);
         }
     }
-    // submit a 'get' request to the wordsAPI; 'true' is used to make the request asynchronously
-    xhttp.open("GET", link, true);
+    // submit a 'get' request to the wordsAPI; 'false' is used to make the request synchronously
+    xhttp.open("GET", link, false);
     xhttp.setRequestHeader("X-RapidAPI-Host", "wordsapiv1.p.rapidapi.com");
     xhttp.setRequestHeader("X-RapidAPI-Key", "8dc8c1b89bmshb35f0c5a6ad2260p19de8cjsnad3259bac4af");
     xhttp.send(data);
