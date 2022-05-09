@@ -1,0 +1,24 @@
+.circle {
+    width:400px;
+    height:fit-content;
+    background-color: rgba(255,255,221);
+    border: 2px solid black;
+    position: absolute;
+    color: black;
+    font-size: 14px;   
+}
+.demo {
+    border:1px solid #C0C0C0;
+    border-collapse:collapse;
+    padding:5px;
+}
+.demo th {
+    border:1px solid #C0C0C0;
+    padding:5px;
+    background:#F0F0F0;
+}
+.demo td {
+    border:1px solid #C0C0C0;
+    text-align:center;
+    padding:5px;
+}
