@@ -1,10 +1,8 @@
 //retrieves the text from a double click
 
-//TODO
-// Add word on top of Definition/Synonyms
-// ADD Noun/Verb/Adjectvie
-// ADD "more" link reaveling more definitions
-// ADD "Websearch" link to google with (word + deffinition)
+//msg variable == definition 
+
+// store selected word in variable
 function findWord() {
   word = window.getSelection().toString();
   return word;
@@ -19,10 +17,12 @@ function display() {
 }
 document.body.addEventListener("dblclick", display);
 
+//initalize global variables for output
 var msg = "";
 var thes = "";
 var type = "";
 
+//fuction makes call to API and retrieves data based on "word" variable
 function getAPI() {
   const data = null;
   var xhttp = new XMLHttpRequest();
@@ -30,8 +30,6 @@ function getAPI() {
   var searchWord = findWord();
   var link = "https://wordsapiv1.p.rapidapi.com/words/" + searchWord;
 
-  // since Javascript is asynchronous, we respond to a state change event for the request by
-  // defining a function and assigning it to 'xhttp.onreadystatechange'.
   xhttp.onreadystatechange = function () {
     // if request is unsuccessful
     if (this.readyState == 0 || this.status == 404 || this.status == 400) {
@@ -57,7 +55,6 @@ function getAPI() {
           msg[i] = record.results[i].definition;
         }
       }
-      //console.log(msg);
 
       type = [];
       for (var i = 0; i < record.results.length; i++) {
@@ -114,26 +111,32 @@ function addDiv(x, y) {
   e.id = "mickVespaFinal";
   $(e).addClass("circle");
   
+  //format the created div with global variables
   e.innerHTML =
     `<span style="display: block;font-size: 20px;font-weight: bold; text-align: center">` +
     word +
     `</span> <br>`;
-  
-  var THTML = "<table class='demo'><thead><tr><th>Definition </th><th> Type </th><th> Synonyms </th> </tr> </thead><tbody>";
-  for(j=0; j <= msg.length-1; j++)
-  {
-      THTML += "<tr><td>"+ msg[j] + "</td><td>" + type[j] + "</td><td>" + thes[j] + "</td></tr>";
-  }
-  THTML += "</tr></tbody></table>";
-  e.innerHTML += THTML + "<br>";
+    if (msg[0] === "not a valid word in this database, please try a different word.") {
+        e.innerHTML += "not a valid word in this database, please try a different word."
+    } else {
+        //create variable "THTML" for innerHTML to represent table
+        var THTML = "<table class='demo'><thead><tr><th>Definition </th><th> Type </th><th> Synonyms </th> </tr> </thead><tbody>";
+        for(j=0; j <= msg.length-1; j++)
+        {
+            THTML += "<tr><td>"+ msg[j] + "</td><td>" + type[j] + "</td><td>" + thes[j] + "</td></tr>";
+        }
+        THTML += "</tr></tbody></table>";
+        e.innerHTML += THTML + "<br>";
+    }
 
-
+  // google search button
   let btn = document.createElement("button");
   btn.innerHTML = "More";
   btn.onclick = function () {
     window.open("https://www.google.com/search?q=" + word + "+definition");
   };
 
+  // button 2 is NOT USED
   let btn2 = document.createElement("button");
   btn2.innerHTML = "Next";
   btn2.id = "btn2ID"
